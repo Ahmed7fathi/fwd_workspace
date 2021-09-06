@@ -97,18 +97,54 @@ const movies = {
   },
 };
 
+// structured data
+let st_data = profiles.map(profile => {
+      const user = users[profile.userID].name;
+      const username = users[profile.userID].userName;
+      const favorite_movies = movies[profile.favoriteMovieID].name;
+      return { user, username, favorite_movies }
+});
+
+const container_style = {
+  margin: '10rem 20rem',
+  padding: '10px',
+  textAlign: 'center',
+  border: '5px solid pink'
+};
+
+const name_style = {
+	color: 'red',
+  	fontWeight: 'bold',
+  	fontSize: '22px',
+  	textDecoration: 'underline',
+  
+}
+
+
 class App extends Component {
-  render() {
+  
+   render() {
+    
     return (
       <div>
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">ReactND - Coding Practice</h1>
         </header>
-        <h2>Favorite Movies</h2>
+        <div style={container_style}> 
+          { 
+            st_data.map(info => {
+               //> Jane Cruz's favorite movie is Planet Earth 1.
+               return <p key={info.id}> <span style={name_style}> {info.user}'s </span> favorite movie is {info.favorite_movies} </p>
+
+          })
+          }
+		</div>
       </div>
     );
   }
+   
+    
 }
 
 export default App;
